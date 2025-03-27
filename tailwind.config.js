@@ -1,37 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-
-const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
-  content: {
-    relative: true,
-    transform: (content) => content.replace(/taos:/g, ''),
-    files: ['./src/*.{html,js}'],
-  },
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
-      keyframes: {
-        fade: {
-          to: {
-            scale: '1',
-            opacity: '1',
-          },
-        },
-      },
       animation: {
-        fade: 'fade linear forwards',
+        bounce: 'bounce 2s infinite',
       },
-
-      fontFamily: {
-        'sans': ['"Open Sans"', '"Lato"', ...defaultTheme.fontFamily.sans],
+      keyframes: {
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-3%)' },
+        },
       },
     },
   },
   plugins: [
-    require('taos/plugin')
-  ],
-  safelist: [
-    '!duration-[0ms]',
-    '!delay-[0ms]',
-    'html.js :where([class*="taos:"]:not(.taos-init))'
+    require('tailwind-scrollbar-hide')
   ],
 }
